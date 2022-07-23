@@ -24,18 +24,13 @@ export class WeverseService {
     const [notifications] = await this.weverseApi.saveNotifications();
 
     const noti = await this.notiRepository.find({
-      where: {
-        activityId: Raw(
-          (activityId) => `${activityId} < ${"1549590022387209053"}`,
-        ),
-      },
       order: {
         activityId: "DESC",
       },
-      take: 2,
+      take: 30,
     });
 
-    const [data] = await this.weverseApi.saveData(
+    const data = await this.weverseApi.saveData(
       notifications?.length ? notifications : noti,
     );
 

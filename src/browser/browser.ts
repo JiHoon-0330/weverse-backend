@@ -44,7 +44,7 @@ export class Browser {
     clickSelector?: string,
   ): Return<{ [key in keyof T]: T[key] }> {
     const browser = await puppeteer.launch({
-      headless: false,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const checkList = <string[]>[];
     const apiUrlObjKeys = Object.keys(apiUrlObj) as (keyof T)[];
@@ -113,7 +113,8 @@ export class Browser {
       console.log("catch error: getResponseByApiUrl: ", error);
       return [undefined, error];
     } finally {
-      await browser.close();
+      if (clickSelector) browser.close();
+      browser.close();
     }
   }
 }
