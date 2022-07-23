@@ -1,0 +1,550 @@
+{
+  "data": [
+    {
+      "createdAt": 1658295620552,
+      "commentCount": 0,
+      "writtenIn": "ko",
+      "emotionCount": 48,
+      "availableActions": ["WRITE_COMMENT", "READ_COMMENT", "WRITE_EMOTION"],
+      "commentId": "0-200678782",
+      "body": "이렇게 밝게 열심히 촬영중이니까 걱정 말아요 와우들 걱정시키기 싫어 🥹🥹❤️",
+      "parent": {
+        "type": "COMMENT",
+        "data": {
+          "createdAt": 1658295223739,
+          "commentId": "4-170420366",
+          "body": "나연이를 걱정하는 거 와우 특권이니까 항상 나연이가 건강하게 보내고 있는지 생각해🐰💙나연이도 와우 생각 해줘서 고마워^^ 오늘도 좋은 하루 보내요!! 항상 응원하고 사랑해 화이팅~🥰🥰",
+          "author": {
+            "memberId": "3e3f29c1b74f1054b47cd68c945f7ca7",
+            "profileName": "하루🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA2MThfMjcz/MDAxNjU1NTA3MjU2MzU0.-t0c85UrB4n38gMhnnRyzYcaUWg8IyeDjmOcf3uUgvsg.5wV77jAdG4xq90A74SBwY6sYdiivYm6_bLwcRaMiBosg.JPEG/5e6a842953824e278020e3149e32343a705.jpg",
+            "profileType": "FAN"
+          }
+        }
+      },
+      "author": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "communityId": 24,
+        "joined": true,
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "memberJoinStatus": "JOIN_COMMUNITY",
+        "profileType": "ARTIST",
+        "artistOfficialProfile": {
+          "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+          "officialName": "나나",
+          "birthday": {
+            "date": 984096000000,
+            "timezone": "Asia/Seoul",
+            "bday": false
+          }
+        },
+        "hasOfficialMark": true,
+        "profileSpaceStatus": "ACCESSIBLE",
+        "myProfile": false
+      },
+      "root": {
+        "type": "POST",
+        "data": {
+          "postId": "4-100792946",
+          "punishStatuses": [],
+          "sectionType": "ARTIST",
+          "availableActions": [
+            "WRITE_COMMENT",
+            "READ_POST",
+            "BOOKMARK",
+            "WRITE_EMOTION"
+          ],
+          "postType": "NORMAL",
+          "membershipOnly": false,
+          "plainBody": "와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋",
+          "locked": false,
+          "shareUrl": "https://weverse.io/wooah/artist/4-100792946",
+          "body": "\n와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋<w:attachment type=\"photo\" id=\"1-256493977\" />",
+          "author": {
+            "memberId": "287797a9070d1c7b9276b68aa2aae940",
+            "communityId": 24,
+            "joined": true,
+            "profileName": "권나나🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+            "memberJoinStatus": "JOIN_COMMUNITY",
+            "profileType": "ARTIST",
+            "artistOfficialProfile": {
+              "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+              "officialName": "나나",
+              "birthday": {
+                "date": 984096000000,
+                "timezone": "Asia/Seoul",
+                "bday": false
+              }
+            },
+            "hasOfficialMark": true,
+            "profileSpaceStatus": "ACCESSIBLE",
+            "myProfile": false
+          }
+        }
+      },
+      "lastModifierMember": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "profileType": "ARTIST"
+      }
+    },
+    {
+      "createdAt": 1658295564398,
+      "commentCount": 0,
+      "writtenIn": "ko",
+      "emotionCount": 24,
+      "availableActions": ["WRITE_COMMENT", "READ_COMMENT", "WRITE_EMOTION"],
+      "commentId": "1-200673726",
+      "body": "콩자반 … 왠지 끌리네요 ",
+      "parent": {
+        "type": "COMMENT",
+        "data": {
+          "createdAt": 1658295369255,
+          "commentId": "2-200656269",
+          "body": "나연이 너무 이쁜거아냐ㅠㅠㅠㅠ 오늘도 좋은하루보내!!!!💙",
+          "author": {
+            "memberId": "c4fcdb49a2ec430b5a9d27db99a2c730",
+            "profileName": "콩자반",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MjBfMzUg/MDAxNjU4Mjk1NTQ0OTg3.hNf6YJaPzMFzghCd48nbmixQWF9rLxtmo6wcRf59lu0g.yAOD5nKTv0pnkC4lQ51rWbB3zQmKSDvhuui5F6aZUrog.JPEG/image.jpg",
+            "profileType": "FAN"
+          }
+        }
+      },
+      "author": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "communityId": 24,
+        "joined": true,
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "memberJoinStatus": "JOIN_COMMUNITY",
+        "profileType": "ARTIST",
+        "artistOfficialProfile": {
+          "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+          "officialName": "나나",
+          "birthday": {
+            "date": 984096000000,
+            "timezone": "Asia/Seoul",
+            "bday": false
+          }
+        },
+        "hasOfficialMark": true,
+        "profileSpaceStatus": "ACCESSIBLE",
+        "myProfile": false
+      },
+      "root": {
+        "type": "POST",
+        "data": {
+          "postId": "4-100792946",
+          "punishStatuses": [],
+          "sectionType": "ARTIST",
+          "availableActions": [
+            "WRITE_COMMENT",
+            "READ_POST",
+            "BOOKMARK",
+            "WRITE_EMOTION"
+          ],
+          "postType": "NORMAL",
+          "membershipOnly": false,
+          "plainBody": "와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋",
+          "locked": false,
+          "shareUrl": "https://weverse.io/wooah/artist/4-100792946",
+          "body": "\n와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋<w:attachment type=\"photo\" id=\"1-256493977\" />",
+          "author": {
+            "memberId": "287797a9070d1c7b9276b68aa2aae940",
+            "communityId": 24,
+            "joined": true,
+            "profileName": "권나나🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+            "memberJoinStatus": "JOIN_COMMUNITY",
+            "profileType": "ARTIST",
+            "artistOfficialProfile": {
+              "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+              "officialName": "나나",
+              "birthday": {
+                "date": 984096000000,
+                "timezone": "Asia/Seoul",
+                "bday": false
+              }
+            },
+            "hasOfficialMark": true,
+            "profileSpaceStatus": "ACCESSIBLE",
+            "myProfile": false
+          }
+        }
+      },
+      "lastModifierMember": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "profileType": "ARTIST"
+      }
+    },
+    {
+      "createdAt": 1658295541254,
+      "commentCount": 0,
+      "writtenIn": "ko",
+      "emotionCount": 24,
+      "availableActions": ["WRITE_COMMENT", "READ_COMMENT", "WRITE_EMOTION"],
+      "commentId": "0-200678487",
+      "body": "짜릿해 최고야 감동💛💜",
+      "parent": {
+        "type": "COMMENT",
+        "data": {
+          "createdAt": 1658295426671,
+          "commentId": "2-200656507",
+          "body": "나연언니 나 아이돌 좋아하면서 뭔가 가장 의외였던 사람 언니다 ? 그렇게 낮은 목소리가 나올줄 몰랐고 그렇게 파워풀한 춤선이 나올줄 몰랐고 랩도 할줄은 몰랐다? 근데 연기까지 하더라 언니.. 뭐 비주얼은 말해뭐해.. 제일 완벽해. 그래서 입덕했나봐 ㅎㅎ 너무 멋있어 오래오래 아티스트 해줘요🤍",
+          "author": {
+            "memberId": "7042b65d72f5100244016c3100bbe52d",
+            "profileName": "나여니보고시퍼",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA2MTZfMTIg/MDAxNjU1MzU5NjAxNjE5.E5dzGleLniHAM2AGCAjmowT7T4sSysavgfvkVegBCiwg.GpLTgGkHu6eRK0CxEjp0e6VMkR5Xho2yPaEO79DFo78g.PNG/profile_defalut_img_01.png",
+            "profileType": "FAN"
+          }
+        }
+      },
+      "author": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "communityId": 24,
+        "joined": true,
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "memberJoinStatus": "JOIN_COMMUNITY",
+        "profileType": "ARTIST",
+        "artistOfficialProfile": {
+          "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+          "officialName": "나나",
+          "birthday": {
+            "date": 984096000000,
+            "timezone": "Asia/Seoul",
+            "bday": false
+          }
+        },
+        "hasOfficialMark": true,
+        "profileSpaceStatus": "ACCESSIBLE",
+        "myProfile": false
+      },
+      "root": {
+        "type": "POST",
+        "data": {
+          "postId": "4-100792946",
+          "punishStatuses": [],
+          "sectionType": "ARTIST",
+          "availableActions": [
+            "WRITE_COMMENT",
+            "READ_POST",
+            "BOOKMARK",
+            "WRITE_EMOTION"
+          ],
+          "postType": "NORMAL",
+          "membershipOnly": false,
+          "plainBody": "와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋",
+          "locked": false,
+          "shareUrl": "https://weverse.io/wooah/artist/4-100792946",
+          "body": "\n와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋<w:attachment type=\"photo\" id=\"1-256493977\" />",
+          "author": {
+            "memberId": "287797a9070d1c7b9276b68aa2aae940",
+            "communityId": 24,
+            "joined": true,
+            "profileName": "권나나🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+            "memberJoinStatus": "JOIN_COMMUNITY",
+            "profileType": "ARTIST",
+            "artistOfficialProfile": {
+              "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+              "officialName": "나나",
+              "birthday": {
+                "date": 984096000000,
+                "timezone": "Asia/Seoul",
+                "bday": false
+              }
+            },
+            "hasOfficialMark": true,
+            "profileSpaceStatus": "ACCESSIBLE",
+            "myProfile": false
+          }
+        }
+      },
+      "lastModifierMember": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "profileType": "ARTIST"
+      }
+    },
+    {
+      "createdAt": 1658295061164,
+      "commentCount": 0,
+      "writtenIn": "ko",
+      "emotionCount": 26,
+      "availableActions": ["WRITE_COMMENT", "READ_COMMENT", "WRITE_EMOTION"],
+      "commentId": "0-200676630",
+      "body": "스키삐 💙 오늘은 뭐해요?",
+      "parent": {
+        "type": "COMMENT",
+        "data": {
+          "createdAt": 1658295041592,
+          "commentId": "2-200654843",
+          "body": "나나언니 오늘도 스키삐💓",
+          "author": {
+            "memberId": "cd1f0f87cf011813757237452821e1e4",
+            "profileName": "세나🌼",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA2MTdfMjU1/MDAxNjU1NDc2MTg2Nzgy.o55mAMNnU5WWME4FtQPgSeeJX8p6STw6KOTLaaa5p2og.b4rptqklPguiRy9fRYOuAvcs0Na2iFE7pgbx0SITzOwg.JPEG/93d4d0047f894a1bb3a0efb63ca22d19445.jpg",
+            "profileType": "FAN"
+          }
+        }
+      },
+      "author": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "communityId": 24,
+        "joined": true,
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "memberJoinStatus": "JOIN_COMMUNITY",
+        "profileType": "ARTIST",
+        "artistOfficialProfile": {
+          "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+          "officialName": "나나",
+          "birthday": {
+            "date": 984096000000,
+            "timezone": "Asia/Seoul",
+            "bday": false
+          }
+        },
+        "hasOfficialMark": true,
+        "profileSpaceStatus": "ACCESSIBLE",
+        "myProfile": false
+      },
+      "root": {
+        "type": "POST",
+        "data": {
+          "postId": "4-100792946",
+          "punishStatuses": [],
+          "sectionType": "ARTIST",
+          "availableActions": [
+            "WRITE_COMMENT",
+            "READ_POST",
+            "BOOKMARK",
+            "WRITE_EMOTION"
+          ],
+          "postType": "NORMAL",
+          "membershipOnly": false,
+          "plainBody": "와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋",
+          "locked": false,
+          "shareUrl": "https://weverse.io/wooah/artist/4-100792946",
+          "body": "\n와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋<w:attachment type=\"photo\" id=\"1-256493977\" />",
+          "author": {
+            "memberId": "287797a9070d1c7b9276b68aa2aae940",
+            "communityId": 24,
+            "joined": true,
+            "profileName": "권나나🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+            "memberJoinStatus": "JOIN_COMMUNITY",
+            "profileType": "ARTIST",
+            "artistOfficialProfile": {
+              "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+              "officialName": "나나",
+              "birthday": {
+                "date": 984096000000,
+                "timezone": "Asia/Seoul",
+                "bday": false
+              }
+            },
+            "hasOfficialMark": true,
+            "profileSpaceStatus": "ACCESSIBLE",
+            "myProfile": false
+          }
+        }
+      },
+      "lastModifierMember": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "profileType": "ARTIST"
+      }
+    },
+    {
+      "createdAt": 1658295029526,
+      "commentCount": 0,
+      "writtenIn": "ko",
+      "emotionCount": 27,
+      "availableActions": ["WRITE_COMMENT", "READ_COMMENT", "WRITE_EMOTION"],
+      "commentId": "3-170421501",
+      "body": "좀 전에 점심 챙겨먹었어요!!",
+      "parent": {
+        "type": "COMMENT",
+        "data": {
+          "createdAt": 1658294906774,
+          "commentId": "0-200676164",
+          "body": "나나야 식사를 먹었어요??? 많이 먹어라!!!! 아프지마요 사랑해♥",
+          "author": {
+            "memberId": "0fcc16c73461c4dcab576faeadeb6186",
+            "profileName": "gabs🐄#joy🌈",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA2MTlfMjcz/MDAxNjU1NjQ3NTM4MzM1.aHWe3cGK_cO7QuDdk83DqIPuaGaD18aJ9isnGarVdjUg.neWj3jePJ-8_y6EserZ_U415LTmDlaVCs7Q6r34ZIjQg.JPEG/d57a8889e95a4f4b8e5dad91bbb3fbe1675.jpg",
+            "profileType": "FAN"
+          }
+        }
+      },
+      "author": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "communityId": 24,
+        "joined": true,
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "memberJoinStatus": "JOIN_COMMUNITY",
+        "profileType": "ARTIST",
+        "artistOfficialProfile": {
+          "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+          "officialName": "나나",
+          "birthday": {
+            "date": 984096000000,
+            "timezone": "Asia/Seoul",
+            "bday": false
+          }
+        },
+        "hasOfficialMark": true,
+        "profileSpaceStatus": "ACCESSIBLE",
+        "myProfile": false
+      },
+      "root": {
+        "type": "POST",
+        "data": {
+          "postId": "4-100792946",
+          "punishStatuses": [],
+          "sectionType": "ARTIST",
+          "availableActions": [
+            "WRITE_COMMENT",
+            "READ_POST",
+            "BOOKMARK",
+            "WRITE_EMOTION"
+          ],
+          "postType": "NORMAL",
+          "membershipOnly": false,
+          "plainBody": "와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋",
+          "locked": false,
+          "shareUrl": "https://weverse.io/wooah/artist/4-100792946",
+          "body": "\n와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋<w:attachment type=\"photo\" id=\"1-256493977\" />",
+          "author": {
+            "memberId": "287797a9070d1c7b9276b68aa2aae940",
+            "communityId": 24,
+            "joined": true,
+            "profileName": "권나나🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+            "memberJoinStatus": "JOIN_COMMUNITY",
+            "profileType": "ARTIST",
+            "artistOfficialProfile": {
+              "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+              "officialName": "나나",
+              "birthday": {
+                "date": 984096000000,
+                "timezone": "Asia/Seoul",
+                "bday": false
+              }
+            },
+            "hasOfficialMark": true,
+            "profileSpaceStatus": "ACCESSIBLE",
+            "myProfile": false
+          }
+        }
+      },
+      "lastModifierMember": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "profileType": "ARTIST"
+      }
+    },
+    {
+      "createdAt": 1658295005287,
+      "commentCount": 0,
+      "writtenIn": "ko",
+      "emotionCount": 22,
+      "availableActions": ["WRITE_COMMENT", "READ_COMMENT", "WRITE_EMOTION"],
+      "commentId": "1-200671441",
+      "body": "갓경나나 좋아해요 후후🌼😮",
+      "parent": {
+        "type": "COMMENT",
+        "data": {
+          "createdAt": 1658294981581,
+          "commentId": "0-200676232",
+          "body": "당신의 안경쓴 모습이 너무나 좋아요!💞",
+          "author": {
+            "memberId": "b1f3f73216ba8b2eb6926dc000e6e56a",
+            "profileName": "❤️🦋🌈",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MTRfMTAg/MDAxNjU3Nzg0ODg2MjMy.X1s6lilRskNGAf-0BjgeWDY7iwfR3Ho3Ti-wfBJg1qUg.z1B-NjSyFpxUZRBb-81SJnz71JMzK33GGUFlrnN_SE0g.JPEG/0ce2198de592416badbc184829ef199b416.jpg",
+            "profileType": "FAN"
+          }
+        }
+      },
+      "author": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "communityId": 24,
+        "joined": true,
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "memberJoinStatus": "JOIN_COMMUNITY",
+        "profileType": "ARTIST",
+        "artistOfficialProfile": {
+          "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+          "officialName": "나나",
+          "birthday": {
+            "date": 984096000000,
+            "timezone": "Asia/Seoul",
+            "bday": false
+          }
+        },
+        "hasOfficialMark": true,
+        "profileSpaceStatus": "ACCESSIBLE",
+        "myProfile": false
+      },
+      "root": {
+        "type": "POST",
+        "data": {
+          "postId": "4-100792946",
+          "punishStatuses": [],
+          "sectionType": "ARTIST",
+          "availableActions": [
+            "WRITE_COMMENT",
+            "READ_POST",
+            "BOOKMARK",
+            "WRITE_EMOTION"
+          ],
+          "postType": "NORMAL",
+          "membershipOnly": false,
+          "plainBody": "와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋",
+          "locked": false,
+          "shareUrl": "https://weverse.io/wooah/artist/4-100792946",
+          "body": "\n와우 !! 저 힘들까봐 많이들 걱정하길래ㅜㅜ 걱정하지 말라구 새로운 따끈따끈한 사진 올려보아요🖤\n정말 많은 경험 하는 요즘이여서 재밌어요 🙏\n오늘도 빠이띠이이이잉 \n꼬물꼬물 룸메들도 고마오 아침부터 당충전 해쏘💋<w:attachment type=\"photo\" id=\"1-256493977\" />",
+          "author": {
+            "memberId": "287797a9070d1c7b9276b68aa2aae940",
+            "communityId": 24,
+            "joined": true,
+            "profileName": "권나나🐰",
+            "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+            "memberJoinStatus": "JOIN_COMMUNITY",
+            "profileType": "ARTIST",
+            "artistOfficialProfile": {
+              "officialImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+              "officialName": "나나",
+              "birthday": {
+                "date": 984096000000,
+                "timezone": "Asia/Seoul",
+                "bday": false
+              }
+            },
+            "hasOfficialMark": true,
+            "profileSpaceStatus": "ACCESSIBLE",
+            "myProfile": false
+          }
+        }
+      },
+      "lastModifierMember": {
+        "memberId": "287797a9070d1c7b9276b68aa2aae940",
+        "profileName": "권나나🐰",
+        "profileImageUrl": "https://weverse-phinf.pstatic.net/MjAyMjA3MThfMjA4/MDAxNjU4MTA2OTA2Njk2.XxVs3QL29JC2VZKZw6s1cZyWXt3QYWREVfMCXWJWFxgg.wfvF-tko_iHQF2KTImj9Iw8Egx3-l5SagNuSH9JI3wwg.PNG/40181912746969507b74fde6d-7d62-4c65-9e4b-98087ccc9384.png",
+        "profileType": "ARTIST"
+      }
+    }
+  ]
+}

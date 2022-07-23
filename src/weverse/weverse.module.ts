@@ -1,0 +1,13 @@
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { WeverseApiV2 } from "src/api";
+import { Comment, Media, Noti, Password, Post } from "src/typeorm/weverse";
+import { WeverseController } from "./weverse.controller";
+import { WeverseService } from "./weverse.v2.service";
+
+@Module({
+  imports: [TypeOrmModule.forFeature([Password, Noti, Post, Comment, Media])],
+  providers: [WeverseService, WeverseApiV2],
+  controllers: [WeverseController],
+})
+export class WeverseModule {}
