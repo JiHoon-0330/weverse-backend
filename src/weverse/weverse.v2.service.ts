@@ -23,16 +23,18 @@ export class WeverseService {
   async saveWeverse() {
     const [notifications] = await this.weverseApi.saveNotifications();
 
-    const noti = await this.notiRepository.find({
-      order: {
-        activityId: "DESC",
-      },
-      take: 30,
-    });
+    // const noti = await this.notiRepository.find({
+    //   order: {
+    //     activityId: "DESC",
+    //   },
+    //   take: 30,
+    // });
 
-    const data = await this.weverseApi.saveData(
-      notifications?.length ? notifications : noti,
-    );
+    // const data = await this.weverseApi.saveData(
+    //   notifications?.length ? notifications : noti,
+    // );
+
+    const data = await this.weverseApi.saveData(notifications ?? []);
 
     return data;
   }
@@ -51,7 +53,7 @@ export class WeverseService {
       take,
     });
 
-    const useList = [...notiList]?.slice(0, 10);
+    const useList = [...notiList]?.slice(0, take - 1);
 
     const data = await Promise.all(
       useList.map(async (noti) => {
