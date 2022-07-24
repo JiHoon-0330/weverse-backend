@@ -61,53 +61,56 @@ export class WeverseService {
         const { postId, messageId } = noti;
         const isMedia = messageId.includes("COMMUNITY_MEDIA");
 
-        const [post, comments] = await Promise.all([
-          (async () => {
-            if (isMedia) {
-              return await this.mediaRepository.findOne({
-                where: {
-                  postId,
-                },
-              });
-            } else {
-              return await this.postRepository.findOne({
-                where: {
-                  postId,
-                },
-              });
-            }
-          })(),
-          (async () => {
-            const comments = await this.commentRepository.find({
-              where: {
-                postId,
-              },
-              order: {
-                createdAt: "ASC",
-              },
-            });
-            const commentObj = <
-              {
-                [key: string]: [Comment["parent"], Omit<Comment, "parent">[]];
-              }
-            >{};
-            comments.map((comment) => {
-              if (comment?.parent) {
-                const { parent, ...commentData } = comment;
-                const parentCommentId = parent.commentId;
-                if (commentObj?.[parentCommentId]) {
-                  commentObj[parentCommentId][1].push(commentData);
-                } else {
-                  commentObj[parentCommentId] = [parent, [commentData]];
-                }
+        const [post, comments] = await Promise.all(
+          [
+            (async () => {
+              if (isMedia) {
+                return null;
+                return await this.mediaRepository.findOne({
+                  where: {
+                    postId,
+                  },
+                });
               } else {
-                const { parent, ...commentData } = comment;
-                commentObj[commentData.commentId] = [commentData, []];
+                return await this.postRepository.findOne({
+                  where: {
+                    postId,
+                  },
+                });
               }
-            });
-            return Object.values(commentObj);
-          })(),
-        ]);
+            })(),
+            (async () => {
+              const comments = await this.commentRepository.find({
+                where: {
+                  postId,
+                },
+                order: {
+                  createdAt: "ASC",
+                },
+              });
+              const commentObj = <
+                {
+                  [key: string]: [Comment["parent"], Omit<Comment, "parent">[]];
+                }
+              >{};
+              comments.map((comment) => {
+                if (comment?.parent) {
+                  const { parent, ...commentData } = comment;
+                  const parentCommentId = parent.commentId;
+                  if (commentObj?.[parentCommentId]) {
+                    commentObj[parentCommentId][1].push(commentData);
+                  } else {
+                    commentObj[parentCommentId] = [parent, [commentData]];
+                  }
+                } else {
+                  const { parent, ...commentData } = comment;
+                  commentObj[commentData.commentId] = [commentData, []];
+                }
+              });
+              return Object.values(commentObj);
+            })(),
+          ].filter((v) => v),
+        );
         return { ...post, comments };
       }),
     );
@@ -119,5 +122,18 @@ export class WeverseService {
     };
   }
 
-  async getTest() {}
+  async getTest() {
+    const noti = await this.notiRepository.find({
+      order: {
+        activityId: "DESC",
+      },
+      where: {
+        activityId: Raw((activityId) => `${activityId} <= 1550073116374405743`),
+      },
+    });
+
+    const data = await this.weverseApi.saveData(noti ?? []);
+
+    return data;
+  }
 }

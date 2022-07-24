@@ -30,7 +30,8 @@ export type NotificationV2Type = {
 export type Photo = {
   photo: {
     [key: string]: {
-      photoId: typeof key;
+      width: number;
+      height: number;
       url: string;
     };
   };
@@ -101,7 +102,8 @@ export type MediaYoutube = {
 export type MediaImage = {
   image: {
     url: string;
-    photoId: string;
+    width: number;
+    height: number;
   }[];
 };
 

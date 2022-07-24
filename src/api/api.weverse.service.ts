@@ -234,8 +234,9 @@ export class WeverseApiV2 extends Api {
       if ("photo" in attachment) {
         postObj["photo"] = Object.entries(attachment.photo)
           .sort(([a], [b]) => (a < b ? -1 : 1))
-          .map(([_, { photoId, url }]) => ({
-            photoId,
+          .map(([_, { width, height, url }]) => ({
+            width,
+            height,
             url,
           }));
       }
@@ -302,12 +303,11 @@ export class WeverseApiV2 extends Api {
       };
 
       if (postType === "IMAGE") {
-        mediaObj["photo"] = {
-          photo: extension.image.map(({ photoId, url }) => ({
-            photoId,
-            url,
-          })),
-        };
+        mediaObj["photo"] = extension.image.map(({ width, height, url }) => ({
+          width,
+          height,
+          url,
+        }));
       }
 
       if (postType === "VIDEO") {
@@ -333,9 +333,13 @@ export class WeverseApiV2 extends Api {
       const type = getMessageIdType(messageId);
       if (type === "NOTICE" || type === "UNKNOWN") continue;
 
-      type ResponseType<T extends typeof type> = T extends "MEDIA"
-        ? { post: MediaPost; comments: { data: ArtistComment[] } }
-        : { post: ArtistPost; comments: { data: ArtistComment[] } };
+      type ResponseType = {
+        post: ArtistPost;
+        comments: { data: ArtistComment[] };
+      };
+      // type ResponseType<T extends typeof type> = T extends "MEDIA"
+      //   ? { post: MediaPost; comments: { data: ArtistComment[] } }
+      //   : { post: ArtistPost; comments: { data: ArtistComment[] } };
 
       const apiUrlObj = getApiUrl(type, webUrl);
 
@@ -346,9 +350,11 @@ export class WeverseApiV2 extends Api {
           {
             if (isCheckList.includes(webUrl)) break;
 
-            const [response] = await this.#browser.getResponseByApiUrl<
-              ResponseType<typeof type>
-            >(webUrl, apiUrlObj);
+            const [response] =
+              await this.#browser.getResponseByApiUrl<ResponseType>(
+                webUrl,
+                apiUrlObj,
+              );
             console.log(
               JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
             );
@@ -379,34 +385,35 @@ export class WeverseApiV2 extends Api {
 
         case "MEDIA":
           {
-            if (isCheckList.includes(webUrl)) break;
-
-            const [response] = await this.#browser.getResponseByApiUrl<
-              ResponseType<typeof type>
-            >(webUrl, apiUrlObj);
-
-            if (!response) break;
-
-            isCheckList.push(webUrl);
-            const { post, comments } = response;
-
-            const formattedMedia = await getFormattedMedia(post, webUrl);
-            const formattedComments = await getFormattedComments(
-              comments?.data,
-              post.postId,
-            );
-
-            await Promise.all([
-              await this.mediaRepository.save(formattedMedia),
-              ...formattedComments.map(async (comment) => {
-                return await this.commentRepository.save(comment);
-              }),
-            ]);
-
-            responseList.push({
-              post: formattedMedia,
-              comments: formattedComments,
-            });
+            // if (isCheckList.includes(webUrl)) break;
+            // try {
+            //   const [response] =
+            //     await this.#browser.getResponseByApiUrl<ResponseType>(
+            //       webUrl,
+            //       apiUrlObj,
+            //     );
+            //   console.log(response);
+            //   if (!response) break;
+            //   isCheckList.push(webUrl);
+            //   const { post, comments } = response;
+            //   const formattedMedia = await getFormattedMedia(post, webUrl);
+            //   const formattedComments = await getFormattedComments(
+            //     comments?.data,
+            //     post.postId,
+            //   );
+            //   await Promise.all([
+            //     await this.mediaRepository.save(formattedMedia),
+            //     ...formattedComments.map(async (comment) => {
+            //       return await this.commentRepository.save(comment);
+            //     }),
+            //   ]);
+            //   responseList.push({
+            //     post: formattedMedia,
+            //     comments: formattedComments,
+            //   });
+            // } catch (error) {
+            //   console.log(error);
+            // }
           }
           break;
 

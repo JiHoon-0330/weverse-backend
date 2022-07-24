@@ -16,7 +16,7 @@ export class Media {
   createdAt!: number;
 
   @Column("json")
-  photo?: { photo: MediaImage["image"] };
+  photo?: MediaImage["image"];
 
   @Column("text")
   video?: string;
