@@ -6,6 +6,7 @@ import { Browser } from "src/browser";
 import { Comment, Media, Noti, Password, Post } from "src/typeorm/weverse";
 import { ArtistComment, ArtistPost, MediaPost, Return, Videos } from "type";
 import { Repository } from "typeorm";
+import { WEVERSE } from "utils/database";
 import { Api } from ".";
 
 function weverseConfig(weverseToken: string): AxiosRequestConfig {
@@ -25,15 +26,15 @@ export class WeverseApiV2 extends Api {
 
   constructor(
     private readonly configService: ConfigService,
-    @InjectRepository(Password, "WEVERSE")
+    @InjectRepository(Password, WEVERSE)
     private readonly passwordRepository: Repository<Password>,
-    @InjectRepository(Noti, "WEVERSE")
+    @InjectRepository(Noti, WEVERSE)
     private readonly notiRepository: Repository<Noti>,
-    @InjectRepository(Post, "WEVERSE")
+    @InjectRepository(Post, WEVERSE)
     private readonly postRepository: Repository<Post>,
-    @InjectRepository(Comment, "WEVERSE")
+    @InjectRepository(Comment, WEVERSE)
     private readonly commentRepository: Repository<Comment>,
-    @InjectRepository(Media, "WEVERSE")
+    @InjectRepository(Media, WEVERSE)
     private readonly mediaRepository: Repository<Media>,
   ) {
     super();

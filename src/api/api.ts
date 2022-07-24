@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import merge from "lodash.merge";
 import { ApiRetuenType } from "type";
-
 export class Api {
   #config: AxiosRequestConfig;
 
@@ -9,7 +9,7 @@ export class Api {
   }
 
   protected set setConfig(config: AxiosRequestConfig) {
-    this.#config = { ...this.#config, ...config };
+    this.#config = merge(this.#config, config);
   }
 
   protected async api<T, E = any>(
@@ -20,6 +20,7 @@ export class Api {
         ...this.#config,
         ...config,
       });
+
       return [data, undefined];
     } catch (error) {
       const { response } = error as Required<AxiosError<E>>;

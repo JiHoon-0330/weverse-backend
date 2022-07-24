@@ -2,7 +2,10 @@ import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Cookie {
-  @PrimaryColumn("bigint")
+  @PrimaryColumn("int")
+  id!: number;
+
+  @Column("bigint")
   createAt!: number;
 
   @Column("text")

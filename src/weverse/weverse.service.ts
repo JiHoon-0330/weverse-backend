@@ -3,20 +3,21 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { WeverseApiV2 } from "src/api";
 import { Comment, Media, Noti, Password, Post } from "src/typeorm/weverse";
 import { Raw, Repository } from "typeorm";
+import { WEVERSE } from "utils/database";
 
 @Injectable()
 export class WeverseService {
   constructor(
     private readonly weverseApi: WeverseApiV2,
-    @InjectRepository(Password, "WEVERSE")
+    @InjectRepository(Password, WEVERSE)
     private readonly passwordRepository: Repository<Password>,
-    @InjectRepository(Noti, "WEVERSE")
+    @InjectRepository(Noti, WEVERSE)
     private readonly notiRepository: Repository<Noti>,
-    @InjectRepository(Post, "WEVERSE")
+    @InjectRepository(Post, WEVERSE)
     private readonly postRepository: Repository<Post>,
-    @InjectRepository(Comment, "WEVERSE")
+    @InjectRepository(Comment, WEVERSE)
     private readonly commentRepository: Repository<Comment>,
-    @InjectRepository(Media, "WEVERSE")
+    @InjectRepository(Media, WEVERSE)
     private readonly mediaRepository: Repository<Media>,
   ) {}
 

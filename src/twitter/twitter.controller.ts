@@ -9,7 +9,7 @@ export class TwitterController {
 
   @Get()
   async getTwitter(@Query("from") from?: string) {
-    return await this.twitterService.getTwitter(from ?? "");
+    return await this.twitterService.getTwitter(from);
   }
 
   @Get("cookie")
