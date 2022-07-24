@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { INSTAGRAM, TWITTER, WEVERSE } from "utils/database";
 
 const getConfig = (
   configService: ConfigService,
@@ -22,18 +23,19 @@ const getConfig = (
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      name: "WEVERSE",
+      name: WEVERSE,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         getConfig(configService, "DATABASE_WEVERSE"),
     }),
     TypeOrmModule.forRootAsync({
-      name: "TWITTER",
+      name: TWITTER,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         getConfig(configService, "DATABASE_TWITTER"),
     }),
     TypeOrmModule.forRootAsync({
+      name: INSTAGRAM,
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         getConfig(configService, "DATABASE_INSTAGRAM"),

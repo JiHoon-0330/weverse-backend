@@ -19,7 +19,9 @@ export class TwitterService {
   }
 
   async getTwitter(from?: string) {
-    const instructions = await this.twitterApi.getTwitter(from);
+    const [instructions] = await this.twitterApi.getTwitter(from);
+
+    if (!instructions) return;
 
     const findIndex = instructions.findIndex(
       ({ type = "" }) => type === "TimelineAddEntries",

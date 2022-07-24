@@ -85,6 +85,6 @@ export class TwitterApi extends Api {
       return [undefined, "instructions is empty"];
     }
 
-    return instructions;
+    return [instructions, undefined];
   }
 }
