@@ -19,23 +19,25 @@ type Config = {
 };
 
 export class Browser {
-  #config: Config;
+  #config?: Config;
 
-  constructor(config: string) {
-    this.#config = {
-      cookie: [
-        {
-          domain: ".weverse.io",
-          name: "we_access_token",
-          value: config,
-        },
-        {
-          domain: ".weverse.io",
-          name: "we2_access_token",
-          value: config,
-        },
-      ],
-    };
+  constructor(config?: string) {
+    if (config) {
+      this.#config = {
+        cookie: [
+          {
+            domain: ".weverse.io",
+            name: "we_access_token",
+            value: config,
+          },
+          {
+            domain: ".weverse.io",
+            name: "we2_access_token",
+            value: config,
+          },
+        ],
+      };
+    }
   }
 
   async getResponseByApiUrl<T extends Object>(
@@ -44,7 +46,7 @@ export class Browser {
     clickSelector?: string,
   ): Return<{ [key in keyof T]: T[key] }> {
     const browser = await puppeteer.launch({
-      headless: false,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const checkList = <string[]>[];
     const apiUrlObjKeys = Object.keys(apiUrlObj) as (keyof T)[];
@@ -55,12 +57,13 @@ export class Browser {
     };
 
     try {
-      let isError = false;
       const responseObj = <{ [key in keyof T]: T[key] }>{};
 
       const page = await browser.newPage();
 
-      page.setCookie(...this.#config.cookie);
+      if (this.#config) {
+        page.setCookie(...this.#config.cookie);
+      }
 
       await page.goto(`${WEVERSE_BASE_URL}${pageUrl}`);
 
@@ -90,7 +93,6 @@ export class Browser {
             }
 
             if (400 <= status && status < 600) {
-              isError = true;
               throw `error: getResponseByApiUrl: api error
               \npageUrl: ${pageUrl}
               \napiUrlObj: ${JSON.stringify(apiUrlObj, null, 2)}`;
@@ -113,7 +115,32 @@ export class Browser {
       console.log("catch error: getResponseByApiUrl: ", error);
       return [undefined, error];
     } finally {
-      await browser.close();
+      if (clickSelector) browser.close();
+      browser.close();
     }
+  }
+
+  async getCookie(pageUrl: string, cookieNames: string[]) {
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      headless: false,
+    });
+    const page = await browser.newPage();
+    await page.goto(pageUrl);
+
+    const cookies = await page.cookies();
+
+    await browser.close();
+
+    const cookie = cookies
+      .map((item, index) => {
+        return `${item.name}=${item.value}`;
+      })
+      .join(";");
+
+    const cookieValues = cookieNames.map((cookieName) => {
+      return cookies.filter((item) => item.name === cookieName)?.[0]?.value;
+    });
+    return [cookie, ...cookieValues];
   }
 }

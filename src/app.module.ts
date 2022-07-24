@@ -1,15 +1,23 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { WeverseModule } from "./weverse/weverse.module";
-import { ConfigModule, ConfigService } from "@nestjs/config";
+import { InstagramModule } from "./instagram/instagram.module";
+import { ScheduleModule } from "./schedule/schedule.module";
+import { TwitterModule } from "./twitter/twitter.module";
 import { TypeormModule } from "./typeorm/typeorm.module";
+import { UserModule } from "./user/user.module";
+import { WeverseModule } from "./weverse/weverse.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeormModule,
     WeverseModule,
+    TwitterModule,
+    InstagramModule,
+    ScheduleModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [ConfigService, AppService],
