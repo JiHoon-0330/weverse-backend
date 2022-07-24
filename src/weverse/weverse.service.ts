@@ -8,15 +8,15 @@ import { Raw, Repository } from "typeorm";
 export class WeverseService {
   constructor(
     private readonly weverseApi: WeverseApiV2,
-    @InjectRepository(Password)
+    @InjectRepository(Password, "WEVERSE")
     private readonly passwordRepository: Repository<Password>,
-    @InjectRepository(Noti)
+    @InjectRepository(Noti, "WEVERSE")
     private readonly notiRepository: Repository<Noti>,
-    @InjectRepository(Post)
+    @InjectRepository(Post, "WEVERSE")
     private readonly postRepository: Repository<Post>,
-    @InjectRepository(Comment)
+    @InjectRepository(Comment, "WEVERSE")
     private readonly commentRepository: Repository<Comment>,
-    @InjectRepository(Media)
+    @InjectRepository(Media, "WEVERSE")
     private readonly mediaRepository: Repository<Media>,
   ) {}
 

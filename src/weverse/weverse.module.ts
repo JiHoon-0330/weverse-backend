@@ -6,7 +6,9 @@ import { WeverseController } from "./weverse.controller";
 import { WeverseService } from "./weverse.service";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Password, Noti, Post, Comment, Media])],
+  imports: [
+    TypeOrmModule.forFeature([Password, Noti, Post, Comment, Media], "WEVERSE"),
+  ],
   providers: [WeverseService, WeverseApiV2],
   controllers: [WeverseController],
 })
