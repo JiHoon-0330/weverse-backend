@@ -6,6 +6,7 @@ import { InstagramModule } from "./instagram/instagram.module";
 import { ScheduleModule } from "./schedule/schedule.module";
 import { TwitterModule } from "./twitter/twitter.module";
 import { TypeormModule } from "./typeorm/typeorm.module";
+import { UserModule } from "./user/user.module";
 import { WeverseModule } from "./weverse/weverse.module";
 
 @Module({
@@ -16,6 +17,7 @@ import { WeverseModule } from "./weverse/weverse.module";
     TwitterModule,
     InstagramModule,
     ScheduleModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [ConfigService, AppService],

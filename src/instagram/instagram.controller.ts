@@ -10,7 +10,7 @@ import { InstagramService } from "./instagram.service";
 
 @UseInterceptors(ResponseInterceptor)
 @Controller("instagram")
-export class TwitterController {
+export class InstagramController {
   constructor(private readonly instagramService: InstagramService) {}
 
   @Get("reels")

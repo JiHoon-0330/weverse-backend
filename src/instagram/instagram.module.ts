@@ -4,12 +4,12 @@ import { InstagramApi } from "src/api";
 import { Browser } from "src/browser";
 import { Cookie } from "src/typeorm/instagram";
 import { INSTAGRAM } from "utils/database";
-import { TwitterController } from "./instagram.controller";
+import { InstagramController } from "./instagram.controller";
 import { InstagramService } from "./instagram.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Cookie], INSTAGRAM)],
   providers: [InstagramService, InstagramApi, Browser],
-  controllers: [TwitterController],
+  controllers: [InstagramController],
 })
 export class InstagramModule {}
