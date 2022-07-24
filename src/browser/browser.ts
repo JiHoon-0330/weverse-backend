@@ -119,4 +119,28 @@ export class Browser {
       browser.close();
     }
   }
+
+  async getCookie(pageUrl: string, cookieNames: string[]) {
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      headless: false,
+    });
+    const page = await browser.newPage();
+    await page.goto(pageUrl);
+
+    const cookies = await page.cookies();
+
+    await browser.close();
+
+    const cookie = cookies
+      .map((item, index) => {
+        return `${item.name}=${item.value}`;
+      })
+      .join(";");
+
+    const cookieValues = cookieNames.map((cookieName) => {
+      return cookies.filter((item) => item.name === cookieName)?.[0]?.value;
+    });
+    return [cookie, ...cookieValues];
+  }
 }

@@ -22,11 +22,13 @@ const getConfig = (
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
+      name: "WEVERSE",
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         getConfig(configService, "DATABASE_WEVERSE"),
     }),
     TypeOrmModule.forRootAsync({
+      name: "TWITTER",
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         getConfig(configService, "DATABASE_TWITTER"),
