@@ -123,19 +123,22 @@ export class WeverseApiV2 extends Api {
   }
 
   async saveData(notiList: Noti[]) {
-    const isMatchMessageIdByString = (messageId: string) => (match: string) =>
-      messageId.includes(match);
+    const isMatchMessageIdByString =
+      (messageId: string) =>
+      (...match: string[]) => {
+        return match.reduce((isMatch, match) => {
+          return isMatch || messageId.includes(match);
+        }, false);
+      };
 
     const getMessageIdType = (messageId: string) => {
       const isMatchMessageId = isMatchMessageIdByString(messageId);
 
       switch (true) {
-        case isMatchMessageId("ARTIST_POST") ||
-          isMatchMessageId("ARTIST_COMMENT:post"):
+        case isMatchMessageId("ARTIST_POST", "ARTIST_COMMENT:post"):
           return "POST";
 
-        case isMatchMessageId("ARTIST_MOMENT") ||
-          isMatchMessageId("MOMENT_COMMENT:post"):
+        case isMatchMessageId("ARTIST_MOMENT", "MOMENT_COMMENT:post"):
           return "MOMENT";
 
         case isMatchMessageId("T_FEED_COMMENT:post"):
