@@ -43,68 +43,75 @@ export class WeverseService {
       take,
     });
 
+    const isValidMessageId = (messageId: string) => {
+      return [
+        "ARTIST_POST",
+        "ARTIST_COMMENT:post",
+        "ARTIST_MOMENT",
+        "MOMENT_COMMENT:post",
+        "T_FEED_COMMENT:post",
+      ].reduce((isValid, type) => {
+        return isValid || messageId.includes(type);
+      }, false);
+    };
+
     const useList = [...notiList]?.slice(0, take - 1);
-
+    const checkList = <string[]>[];
     const data = await Promise.all(
-      useList
-        .map(async (noti) => {
-          const { postId, messageId } = noti;
-          const isMedia = messageId.includes("COMMUNITY_MEDIA");
+      useList.map(async (noti) => {
+        const { postId, messageId } = noti;
+        const isValid = isValidMessageId(messageId);
 
-          if (isMedia) return null;
+        if (!isValid || checkList.includes(postId)) return null;
 
-          const [post, comments] = await Promise.all(
-            [
-              (async () => {
-                return await this.postRepository.findOne({
-                  where: {
-                    postId,
-                  },
-                });
-              })(),
-              (async () => {
-                const comments = await this.commentRepository.find({
-                  where: {
-                    postId,
-                  },
-                  order: {
-                    createdAt: "ASC",
-                  },
-                });
-                const commentObj = <
-                  {
-                    [key: string]: [
-                      Comment["parent"],
-                      Omit<Comment, "parent">[],
-                    ];
-                  }
-                >{};
-                comments.map((comment) => {
-                  if (comment?.parent) {
-                    const { parent, ...commentData } = comment;
-                    const parentCommentId = parent.commentId;
-                    if (commentObj?.[parentCommentId]) {
-                      commentObj[parentCommentId][1].push(commentData);
-                    } else {
-                      commentObj[parentCommentId] = [parent, [commentData]];
-                    }
-                  } else {
-                    const { parent, ...commentData } = comment;
-                    commentObj[commentData.commentId] = [commentData, []];
-                  }
-                });
-                return Object.values(commentObj);
-              })(),
-            ].filter((v) => v),
-          );
+        checkList.push(postId);
+        console.log(postId, messageId);
 
-          return { ...post, comments };
-        })
-        .filter((v) => v),
+        const [post, comments] = await Promise.all([
+          (async () => {
+            return await this.postRepository.findOne({
+              where: {
+                postId,
+              },
+            });
+          })(),
+          (async () => {
+            const comments = await this.commentRepository.find({
+              where: {
+                postId,
+              },
+              order: {
+                createdAt: "ASC",
+              },
+            });
+            const commentObj = <
+              {
+                [key: string]: [Comment["parent"], Omit<Comment, "parent">[]];
+              }
+            >{};
+            comments.map((comment) => {
+              if (comment?.parent) {
+                const { parent, ...commentData } = comment;
+                const parentCommentId = parent.commentId;
+                if (commentObj?.[parentCommentId]) {
+                  commentObj[parentCommentId][1].push(commentData);
+                } else {
+                  commentObj[parentCommentId] = [parent, [commentData]];
+                }
+              } else {
+                const { parent, ...commentData } = comment;
+                commentObj[commentData.commentId] = [commentData, []];
+              }
+            });
+            return Object.values(commentObj);
+          })(),
+        ]);
+        return { ...post, comments };
+      }),
     );
 
     return {
-      data,
+      data: data.filter((v) => !!v),
       lastId: useList.at(-1)?.activityId,
       hasMore: notiList.length === take,
     };
