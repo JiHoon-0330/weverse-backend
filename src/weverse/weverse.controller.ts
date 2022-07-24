@@ -1,6 +1,6 @@
 import { Controller, Get, Query, UseInterceptors } from "@nestjs/common";
 import { ResponseInterceptor } from "src/middleware/response.interseptor.middleware";
-import { WeverseService } from "./weverse.v2.service";
+import { WeverseService } from "./weverse.service";
 
 @UseInterceptors(ResponseInterceptor)
 @Controller("weverse")

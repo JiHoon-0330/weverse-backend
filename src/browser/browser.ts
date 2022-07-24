@@ -19,23 +19,25 @@ type Config = {
 };
 
 export class Browser {
-  #config: Config;
+  #config?: Config;
 
-  constructor(config: string) {
-    this.#config = {
-      cookie: [
-        {
-          domain: ".weverse.io",
-          name: "we_access_token",
-          value: config,
-        },
-        {
-          domain: ".weverse.io",
-          name: "we2_access_token",
-          value: config,
-        },
-      ],
-    };
+  constructor(config?: string) {
+    if (config) {
+      this.#config = {
+        cookie: [
+          {
+            domain: ".weverse.io",
+            name: "we_access_token",
+            value: config,
+          },
+          {
+            domain: ".weverse.io",
+            name: "we2_access_token",
+            value: config,
+          },
+        ],
+      };
+    }
   }
 
   async getResponseByApiUrl<T extends Object>(
@@ -55,12 +57,13 @@ export class Browser {
     };
 
     try {
-      let isError = false;
       const responseObj = <{ [key in keyof T]: T[key] }>{};
 
       const page = await browser.newPage();
 
-      page.setCookie(...this.#config.cookie);
+      if (this.#config) {
+        page.setCookie(...this.#config.cookie);
+      }
 
       await page.goto(`${WEVERSE_BASE_URL}${pageUrl}`);
 
@@ -90,7 +93,6 @@ export class Browser {
             }
 
             if (400 <= status && status < 600) {
-              isError = true;
               throw `error: getResponseByApiUrl: api error
               \npageUrl: ${pageUrl}
               \napiUrlObj: ${JSON.stringify(apiUrlObj, null, 2)}`;
