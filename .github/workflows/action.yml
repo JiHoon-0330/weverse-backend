@@ -1,0 +1,25 @@
+name: weverse-backend
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.IP}}
+          username: ${{secrets.ID}}
+          key: ${{secrets.KEY}}
+          port: ${{secrets.PORT}}
+          script: |
+            cd weverse-backend/
+            git checkout main
+            git pull
+            npm run build
+            pm2 kill
+            pm2 start npm -w -i 0 --name "api" -- start

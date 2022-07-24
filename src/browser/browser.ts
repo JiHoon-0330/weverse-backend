@@ -47,6 +47,7 @@ export class Browser {
   ): Return<{ [key in keyof T]: T[key] }> {
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      // headless: false,
     });
     const checkList = <string[]>[];
     const apiUrlObjKeys = Object.keys(apiUrlObj) as (keyof T)[];
@@ -60,6 +61,9 @@ export class Browser {
       const responseObj = <{ [key in keyof T]: T[key] }>{};
 
       const page = await browser.newPage();
+      page.setUserAgent(
+        "'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'",
+      );
 
       if (this.#config) {
         page.setCookie(...this.#config.cookie);
@@ -85,7 +89,9 @@ export class Browser {
 
             if (!isValidUrl) return false;
 
-            const isChecked = checkList.includes(apiUrl);
+            const isChecked =
+              checkList.includes(apiUrl) ||
+              apiUrl === "https://apis.naver.com/rmcnmv/rmcnmv/vod/play/v2.0/";
 
             if (!isChecked) {
               checkList.push(apiUrl);
@@ -115,8 +121,7 @@ export class Browser {
       console.log("catch error: getResponseByApiUrl: ", error);
       return [undefined, error];
     } finally {
-      if (clickSelector) browser.close();
-      browser.close();
+      await browser.close();
     }
   }
 

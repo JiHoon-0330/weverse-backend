@@ -4,7 +4,14 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { AxiosRequestConfig } from "axios";
 import { Browser } from "src/browser";
 import { Comment, Media, Noti, Password, Post } from "src/typeorm/weverse";
-import { ArtistComment, ArtistPost, MediaPost, Return, Videos } from "type";
+import {
+  ArtiseMoment,
+  ArtistComment,
+  ArtistPost,
+  MediaPost,
+  Return,
+  Videos,
+} from "type";
 import { Repository } from "typeorm";
 import { WEVERSE } from "utils/database";
 import { Api } from ".";
@@ -196,17 +203,13 @@ export class WeverseApiV2 extends Api {
       }
     };
 
-    const getVideo = async (
-      webUrl: string,
-      videoId: string,
-      clickSelector?: string,
-    ) => {
+    const getVideo = async (webUrl: string, clickSelector?: string) => {
       const [response] = await this.#browser.getResponseByApiUrl<{
         video: Videos;
       }>(
         webUrl,
         {
-          video: `https://apis.naver.com/rmcnmv/rmcnmv/vod/play/v2.0/${videoId}`,
+          video: `https://apis.naver.com/rmcnmv/rmcnmv/vod/play/v2.0/`,
         },
         clickSelector,
       );
@@ -245,16 +248,102 @@ export class WeverseApiV2 extends Api {
         const videos = await Promise.all(
           Object.entries(attachment.video)
             .map(async ([key, { uploadInfo }]) => {
-              const { imageUrl, videoId } = uploadInfo;
+              const { imageUrl, width, height } = uploadInfo;
+              postObj["photo"] = [{ width, height, url: imageUrl }];
               return await getVideo(
                 webUrl,
-                videoId,
-                ".WidgetMedia.WidgetVideo > *",
+                ".PostPreviewVideoThumbnailView_container__kTCGQ.PostPreviewVideoThumbnailView_-horizontal__ZVhma",
               );
             })
             .filter((value): value is Promise<string> => !!value),
         );
         postObj["video"] = videos?.[0];
+      }
+
+      return postObj;
+    };
+
+    const getFormattedMoment = async (post: ArtiseMoment, webUrl: string) => {
+      const { author, plainBody, publishedAt, locked, postId, extension } =
+        post;
+
+      const postObj: Post = {
+        body: plainBody,
+        createdAt: publishedAt,
+        author: {
+          memberId: author.memberId,
+          profileName: author.profileName,
+          profileType: author.profileType,
+        },
+        locked,
+        postId,
+      };
+
+      const momentVideo = async (videoInfo: {
+        videoId: string;
+        playTime: number;
+        imageUrl: string;
+        height: number;
+        uploadInfoVersion: number;
+        width: number;
+      }) => {
+        const { width, height, imageUrl } = videoInfo;
+        const [response] = await this.#browser.getResponseByApiUrl<{
+          video: {
+            playInfo: {
+              videos: {
+                list: { size: number; source: string }[];
+              };
+            };
+          };
+        }>(webUrl, {
+          video: "https://apis.naver.com/weverse/wevweb/cvideo/v1.0/",
+        });
+
+        const vod = response?.video?.playInfo?.videos?.list
+          ?.sort((a, b) => b.size - a.size)
+          ?.at(0);
+
+        postObj["video"] = vod?.source;
+        postObj["photo"] = [{ width, height, url: imageUrl }];
+      };
+
+      const momentImage = (photo: {
+        height: number;
+        photoId: string;
+        url: string;
+        width: number;
+      }) => {
+        const { width, height, url } = photo;
+        postObj["photo"] = [
+          {
+            width,
+            height,
+            url,
+          },
+        ];
+      };
+
+      if ("moment" in extension) {
+        const { moment } = extension;
+        if ("video" in moment) {
+          await momentVideo(moment.video.uploadInfo);
+        }
+
+        if ("photo" in moment) {
+          momentImage(moment.photo);
+        }
+      }
+
+      if ("momentW1" in extension) {
+        const { momentW1 } = extension;
+        if ("video" in momentW1) {
+          await momentVideo(momentW1.video.uploadInfo);
+        }
+
+        if ("photo" in momentW1) {
+          momentImage(momentW1.photo);
+        }
       }
 
       return postObj;
@@ -311,10 +400,7 @@ export class WeverseApiV2 extends Api {
       }
 
       if (postType === "VIDEO") {
-        mediaObj["video"] = await getVideo(
-          webUrl,
-          extension.video.infraVideoId,
-        );
+        mediaObj["video"] = await getVideo(webUrl);
       }
 
       if (postType === "YOUTUBE") {
@@ -333,10 +419,6 @@ export class WeverseApiV2 extends Api {
       const type = getMessageIdType(messageId);
       if (type === "NOTICE" || type === "UNKNOWN") continue;
 
-      type ResponseType = {
-        post: ArtistPost;
-        comments: { data: ArtistComment[] };
-      };
       // type ResponseType<T extends typeof type> = T extends "MEDIA"
       //   ? { post: MediaPost; comments: { data: ArtistComment[] } }
       //   : { post: ArtistPost; comments: { data: ArtistComment[] } };
@@ -345,16 +427,14 @@ export class WeverseApiV2 extends Api {
 
       switch (type) {
         case "POST":
-        case "MOMENT":
         case "FAM_POST":
           {
             if (isCheckList.includes(webUrl)) break;
 
-            const [response] =
-              await this.#browser.getResponseByApiUrl<ResponseType>(
-                webUrl,
-                apiUrlObj,
-              );
+            const [response] = await this.#browser.getResponseByApiUrl<{
+              post: ArtistPost;
+              comments: { data: ArtistComment[] };
+            }>(webUrl, apiUrlObj);
             console.log(
               JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
             );
@@ -364,6 +444,42 @@ export class WeverseApiV2 extends Api {
             const { post, comments } = response;
 
             const formattedPost = await getFormattedPost(post, webUrl);
+            const formattedComments = getFormattedComments(
+              comments?.data,
+              post.postId,
+            );
+
+            await Promise.all([
+              await this.postRepository.save(formattedPost),
+              ...formattedComments.map(async (comment) => {
+                return await this.commentRepository.save(comment);
+              }),
+            ]);
+
+            responseList.push({
+              post: formattedPost,
+              comments: formattedComments,
+            });
+          }
+          break;
+
+        case "MOMENT":
+          {
+            if (isCheckList.includes(webUrl)) break;
+
+            const [response] = await this.#browser.getResponseByApiUrl<{
+              post: ArtiseMoment;
+              comments: { data: ArtistComment[] };
+            }>(webUrl, apiUrlObj);
+            console.log(
+              JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
+            );
+            if (!response) break;
+
+            isCheckList.push(webUrl);
+            const { post, comments } = response;
+
+            const formattedPost = await getFormattedMoment(post, webUrl);
             const formattedComments = getFormattedComments(
               comments?.data,
               post.postId,

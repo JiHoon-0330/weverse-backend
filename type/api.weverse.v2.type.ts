@@ -43,7 +43,8 @@ export type Video = {
       videoId: typeof key;
       uploadInfo: {
         imageUrl: string;
-        videoId: string;
+        width: number;
+        height: number;
       };
     };
   };
@@ -68,6 +69,66 @@ export type Author = {
 export type ArtistPost = {
   postId: string;
   attachment: Photo | Video;
+  author: Author;
+  plainBody: string;
+  publishedAt: number;
+  locked: boolean;
+};
+
+export type ArtiseMoment = {
+  postId: string;
+  extension: {
+    moment:
+      | {
+          video: {
+            videoId: string;
+            uploadInfo: {
+              videoId: string;
+              playTime: number;
+              imageUrl: string;
+              height: number;
+              uploadInfoVersion: number;
+              width: number;
+            };
+          };
+          momentAsJson: string;
+          expireAt: number;
+          body: string;
+        }
+      | {
+          photo: {
+            height: number;
+            photoId: string;
+            url: string;
+            width: number;
+          };
+        };
+    momentW1:
+      | {
+          video: {
+            videoId: string;
+            uploadInfo: {
+              videoId: string;
+              playTime: number;
+              imageUrl: string;
+              height: number;
+              uploadInfoVersion: number;
+              width: number;
+            };
+          };
+          momentAsJson: string;
+          expireAt: number;
+          body: string;
+        }
+      | {
+          photo: {
+            height: number;
+            photoId: string;
+            url: string;
+            width: number;
+          };
+        };
+  };
   author: Author;
   plainBody: string;
   publishedAt: number;
