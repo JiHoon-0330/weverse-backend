@@ -7,7 +7,7 @@ import { WEVERSE } from "utils/database";
 
 @Injectable()
 export class WeverseService {
-  #cache: { data: any; time: number };
+  #cache: { [key in string]: { data: any; time: number } };
 
   constructor(
     private readonly weverseApi: WeverseApiV2,
@@ -23,8 +23,10 @@ export class WeverseService {
     private readonly mediaRepository: Repository<Media>,
   ) {
     this.#cache = {
-      data: {},
-      time: 0,
+      [""]: {
+        data: {},
+        time: 0,
+      },
     };
   }
 
@@ -37,8 +39,15 @@ export class WeverseService {
   }
 
   async getWeverse(from: string) {
-    if (this.#cache.time && this.#cache.time > Date.now() - 1000 * 60 * 3) {
-      return { ...this.#cache.data, cacheTime: this.#cache.time };
+    console.log(this.#cache);
+    if (
+      this.#cache?.[from ?? ""]?.time &&
+      this.#cache?.[from ?? ""]?.time > Date.now() - 1000 * 60 * 3
+    ) {
+      return {
+        ...this.#cache?.[from ?? ""]?.data,
+        cacheTime: this.#cache?.[from ?? ""]?.time,
+      };
     }
 
     const take = 11;
@@ -126,7 +135,7 @@ export class WeverseService {
     };
 
     if (response.data.length) {
-      this.#cache = {
+      this.#cache[from ?? ""] = {
         data: response,
         time: Date.now(),
       };
