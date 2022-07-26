@@ -30,7 +30,19 @@ export class WeverseService {
     };
   }
 
-  async saveWeverse() {
+  async saveWeverse(postId?: string) {
+    if (postId) {
+      const noti = await this.notiRepository.findOne({
+        where: {
+          postId,
+        },
+      });
+      if (!noti) return;
+
+      const data = await this.weverseApi.saveData([noti]);
+
+      return data;
+    }
     const [notifications] = await this.weverseApi.saveNotifications();
 
     const data = await this.weverseApi.saveData(notifications ?? []);

@@ -13,8 +13,8 @@ export class WeverseController {
   }
 
   @Get("save")
-  async saveWeverse() {
-    return await this.weverseService.saveWeverse();
+  async saveWeverse(@Query("post-id") postId?: string) {
+    return await this.weverseService.saveWeverse(postId);
   }
 
   @Get("test")
