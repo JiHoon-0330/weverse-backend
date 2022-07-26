@@ -39,14 +39,12 @@ export class WeverseService {
   }
 
   async getWeverse(from: string) {
-    console.log(this.#cache);
-    if (
-      this.#cache?.[from ?? ""]?.time &&
-      this.#cache?.[from ?? ""]?.time > Date.now() - 1000 * 60 * 3
-    ) {
+    const cacheByFrom = this.#cache?.[from ?? ""];
+
+    if (cacheByFrom?.time && cacheByFrom?.time > Date.now() - 1000 * 60 * 3) {
       return {
-        ...this.#cache?.[from ?? ""]?.data,
-        cacheTime: this.#cache?.[from ?? ""]?.time,
+        ...cacheByFrom?.data,
+        cacheTime: cacheByFrom?.time,
       };
     }
 
