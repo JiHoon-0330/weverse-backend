@@ -7,6 +7,8 @@ import { WEVERSE } from "utils/database";
 
 @Injectable()
 export class WeverseService {
+  #cache: { data: any; time: number };
+
   constructor(
     private readonly weverseApi: WeverseApiV2,
     @InjectRepository(Password, WEVERSE)
@@ -19,7 +21,12 @@ export class WeverseService {
     private readonly commentRepository: Repository<Comment>,
     @InjectRepository(Media, WEVERSE)
     private readonly mediaRepository: Repository<Media>,
-  ) {}
+  ) {
+    this.#cache = {
+      data: {},
+      time: 0,
+    };
+  }
 
   async saveWeverse() {
     const [notifications] = await this.weverseApi.saveNotifications();
@@ -30,6 +37,10 @@ export class WeverseService {
   }
 
   async getWeverse(from: string) {
+    if (this.#cache.time && this.#cache.time > Date.now() - 1000 * 60 * 3) {
+      return { ...this.#cache.data, cacheTime: this.#cache.time };
+    }
+
     const take = 11;
     const notiList = await this.notiRepository.find({
       where: {
@@ -63,9 +74,6 @@ export class WeverseService {
         const isValid = isValidMessageId(messageId);
 
         if (!isValid || checkList.includes(postId)) return null;
-
-        checkList.push(postId);
-        console.log(postId, messageId);
 
         const [post, comments] = await Promise.all([
           (async () => {
@@ -106,15 +114,25 @@ export class WeverseService {
             return Object.values(commentObj);
           })(),
         ]);
+
         return { ...post, comments };
       }),
     );
 
-    return {
+    const response = {
       data: data.filter((v) => !!v),
       lastId: useList.at(-1)?.activityId,
       hasMore: notiList.length === take,
     };
+
+    if (response.data.length) {
+      this.#cache = {
+        data: response,
+        time: Date.now(),
+      };
+    }
+
+    return response;
   }
 
   async getTest() {

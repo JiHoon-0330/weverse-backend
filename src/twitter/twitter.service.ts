@@ -146,7 +146,7 @@ export class TwitterService {
   }
 
   async getCookie() {
-    return await this.cookieRepository.find();
+    return await this.twitterApi.getCookie();
   }
 
   async saveCookie() {

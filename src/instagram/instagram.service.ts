@@ -66,7 +66,7 @@ export class InstagramService {
   }
 
   async getCookie() {
-    return await this.cookieRepository.find();
+    return await this.instagramApi.getCookie();
   }
 
   async saveCookie() {

@@ -11,6 +11,10 @@ const PAGE_SIZE = 5;
 
 @Injectable()
 export class InstagramApi extends Api {
+  #cookie: {
+    data: Cookie;
+    time: number;
+  };
   constructor(
     @InjectRepository(Cookie, INSTAGRAM)
     private readonly cookieRepository: Repository<Cookie>,
@@ -35,6 +39,18 @@ export class InstagramApi extends Api {
         "Referrer-Policy": "strict-origin-when-cross-origin",
       },
     });
+
+    this.#cookie = {
+      data: {
+        cookie: "",
+        createAt: 0,
+        id: 1,
+        csrftoken: "",
+        ig_did: "",
+        mid: "",
+      },
+      time: 0,
+    };
   }
 
   async getReels(from?: string): Return<any> {
@@ -58,5 +74,30 @@ export class InstagramApi extends Api {
     if (!data) return [undefined, error];
 
     return [data, undefined];
+  }
+
+  async getCookie() {
+    if (
+      this.#cookie.time &&
+      this.#cookie.time > Date.now() - 1000 * 60 * 60 * 24
+    ) {
+      return { ...this.#cookie.data, cacheTime: this.#cookie.time };
+    }
+
+    const [response] = await this.cookieRepository.find();
+
+    if (
+      response.cookie &&
+      response.csrftoken &&
+      response.mid &&
+      response.ig_did
+    ) {
+      this.#cookie = {
+        data: response,
+        time: Date.now(),
+      };
+    }
+
+    return response;
   }
 }

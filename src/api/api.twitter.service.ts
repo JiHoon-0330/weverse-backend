@@ -31,6 +31,10 @@ const features = {
 
 @Injectable()
 export class TwitterApi extends Api {
+  #cookie: {
+    data: Cookie;
+    time: number;
+  };
   constructor(
     @InjectRepository(Cookie, TWITTER)
     private readonly cookieRepository: Repository<Cookie>,
@@ -58,10 +62,20 @@ export class TwitterApi extends Api {
         "x-twitter-client-language": "ko",
       },
     });
+    this.#cookie = {
+      data: {
+        cookie: "",
+        createAt: 0,
+        id: 1,
+        x_csrf_token: "",
+        x_guest_token: "",
+      },
+      time: 0,
+    };
   }
 
   async getTwitter(cursor?: string) {
-    const [cookies] = await this.cookieRepository.find();
+    const cookies = await this.getCookie();
     this.setConfig = {
       headers: {
         cookie: cookies.cookie,
@@ -86,5 +100,22 @@ export class TwitterApi extends Api {
     }
 
     return [instructions, undefined];
+  }
+
+  async getCookie() {
+    if (this.#cookie.time && this.#cookie.time > Date.now() - 1000 * 60 * 90) {
+      return { ...this.#cookie.data, cacheTime: this.#cookie.time };
+    }
+
+    const [response] = await this.cookieRepository.find();
+
+    if (response.cookie && response.x_csrf_token && response.x_guest_token) {
+      this.#cookie = {
+        data: response,
+        time: Date.now(),
+      };
+    }
+
+    return response;
   }
 }
