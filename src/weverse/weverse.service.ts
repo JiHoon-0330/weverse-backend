@@ -120,7 +120,7 @@ export class WeverseService {
     );
 
     const response = {
-      data: data.filter((v) => !!v),
+      data: data.filter((v) => !!v?.postId),
       lastId: useList.at(-1)?.activityId,
       hasMore: notiList.length === take,
     };
