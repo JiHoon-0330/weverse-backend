@@ -103,7 +103,7 @@ export class TwitterApi extends Api {
   }
 
   async getCookie() {
-    if (this.#cookie.time && this.#cookie.time > Date.now() - 1000 * 60 * 90) {
+    if (this.#cookie.time && this.#cookie.time > Date.now() - 1000 * 60 * 30) {
       return { ...this.#cookie.data, cacheTime: this.#cookie.time };
     }
 
