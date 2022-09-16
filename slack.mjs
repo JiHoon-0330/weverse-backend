@@ -12,7 +12,7 @@ const slackNotify = () => {
       "Content-type": "application/json",
     },
     data: {
-      text: args.join(" ... "),
+      text: args.split("\n\n")?.[1],
     },
   });
 };
