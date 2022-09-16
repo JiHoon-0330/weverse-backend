@@ -19,6 +19,7 @@ jobs:
           script: |
             cd weverse-backend
             git pull
+            npm install
             npm run build
             npm run pm2:reload
             npm run slack ${{ github.event.head_commit.message }}
