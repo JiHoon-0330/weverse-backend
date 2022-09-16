@@ -2,7 +2,7 @@ import axios from "axios";
 import "dotenv/config";
 
 const url = process.env.SLACK_WEBHOOK;
-const [nodePath, filePath, ...args] = process.argv;
+const [nodePath, filePath, message] = process.argv;
 
 const slackNotify = () => {
   axios({
@@ -12,7 +12,7 @@ const slackNotify = () => {
       "Content-type": "application/json",
     },
     data: {
-      text: args.split("\n\n")?.[1],
+      text: message.split("\n\n")?.[1],
     },
   });
 };
