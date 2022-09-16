@@ -17,7 +17,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pm2:start": "pm2 start",
+    "pm2:reload": "pm2 reload wooah-backend",
+    "slack": "node ./slack.mjs"
   },
   "dependencies": {
     "@nestjs/common": "^8.1.1",
@@ -26,6 +29,7 @@
     "@nestjs/platform-express": "^7.5.5",
     "@types/lodash.merge": "^4.6.7",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
     "lodash.merge": "^4.6.2",
     "puppeteer": "^15.4.0",
     "reflect-metadata": "^0.1.13",

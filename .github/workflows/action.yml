@@ -17,9 +17,9 @@ jobs:
           key: ${{secrets.KEY}}
           port: ${{secrets.PORT}}
           script: |
-            cd weverse-backend/
-            git checkout main
+            cd weverse-backend
             git pull
             npm run build
-            pm2 kill
-            pm2 start npm -w -i 0 --name "api" -- start
+            npm run pm2:reload
+            npm run ${{ github.event.head_commit.message }}
+            npm run '${{ github.event.head_commit.message }}'
