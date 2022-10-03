@@ -155,15 +155,22 @@ export class WeverseService {
   }
 
   async getTest() {
+    const from = 1549627684766712736;
     const noti = await this.notiRepository.find({
       order: {
         activityId: "DESC",
       },
       where: {
-        activityId: "1549799874988417025",
+        activityId: "1576898457255334400",
       },
+      // where: {
+      //   activityId: Raw((activityId) =>
+      //     from ? `${activityId} > ${from}` : "",
+      //   ),
+      // },
     });
-
+    console.log(noti);
+    // return noti;
     const data = await this.weverseApi.saveData(noti ?? []);
 
     return data;

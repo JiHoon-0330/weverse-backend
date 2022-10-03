@@ -16,6 +16,8 @@ import { Repository } from "typeorm";
 import { WEVERSE } from "utils/database";
 import { Api } from ".";
 
+const apiBaseURL = "https://global.apis.naver.com";
+
 function weverseConfig(weverseToken: string): AxiosRequestConfig {
   return {
     baseURL: "",
@@ -77,7 +79,7 @@ export class WeverseApiV2 extends Api {
       }>(
         "/wooah/feed",
         {
-          noti: "https://apis.naver.com/weverse/wevweb/noti/feed/v1.0/activities?",
+          noti: `${apiBaseURL}/weverse/wevweb/noti/feed/v1.0/activities?`,
         },
         ".HeaderNotificationWrapperView_notification_button__7mtrz",
       );
@@ -173,8 +175,8 @@ export class WeverseApiV2 extends Api {
         case "MEDIA": {
           const postId = webUrl.split("/").at(-1);
           return {
-            post: `https://apis.naver.com/weverse/wevweb/post/v1.0/post-${postId}?fieldSet=postV1`,
-            comments: `https://apis.naver.com/weverse/wevweb/comment/v1.0/post-${postId}/artistComments?`,
+            post: `${apiBaseURL}/weverse/wevweb/post/v1.0/post-${postId}?fieldSet=postV1`,
+            comments: `${apiBaseURL}/weverse/wevweb/comment/v1.0/post-${postId}/artistComments?`,
           };
         }
 
@@ -182,8 +184,8 @@ export class WeverseApiV2 extends Api {
           const postId = webUrl.split("/comment/")[0].split("/").at(-1);
 
           return {
-            post: `https://apis.naver.com/weverse/wevweb/post/v1.0/post-${postId}?fieldSet=postV1`,
-            comments: `https://apis.naver.com/weverse/wevweb/comment/v1.0/post-${postId}/artistComments?`,
+            post: `${apiBaseURL}/weverse/wevweb/post/v1.0/post-${postId}?fieldSet=postV1`,
+            comments: `${apiBaseURL}/weverse/wevweb/comment/v1.0/post-${postId}/artistComments?`,
           };
         }
 
@@ -209,13 +211,17 @@ export class WeverseApiV2 extends Api {
       }>(
         webUrl,
         {
-          video: `https://apis.naver.com/rmcnmv/rmcnmv/vod/play/v2.0/`,
+          video: `${apiBaseURL}/rmcnmv/rmcnmv/vod/play/v2.0/`,
         },
         clickSelector,
       );
       if (!response) return undefined;
-      return response.video.videos.list.sort((a, b) => b.size - a.size).at(0)
-        ?.source;
+      const video = response.video.videos.list
+        .sort((a, b) => b.size - a.size)
+        .at(0)?.source;
+
+      console.log("getVideo: ", video);
+      return video;
     };
 
     const getFormattedPost = async (post: ArtistPost, webUrl: string) => {
@@ -252,7 +258,7 @@ export class WeverseApiV2 extends Api {
               postObj["photo"] = [{ width, height, url: imageUrl }];
               return await getVideo(
                 webUrl,
-                ".PostPreviewVideoThumbnailView_container__kTCGQ.PostPreviewVideoThumbnailView_-horizontal__ZVhma",
+                "div.WidgetMedia.WidgetVideo > div",
               );
             })
             .filter((value): value is Promise<string> => !!value),
@@ -297,7 +303,7 @@ export class WeverseApiV2 extends Api {
             };
           };
         }>(webUrl, {
-          video: "https://apis.naver.com/weverse/wevweb/cvideo/v1.0/",
+          video: `${apiBaseURL}/weverse/wevweb/cvideo/v1.0/`,
         });
 
         const vod = response?.video?.playInfo?.videos?.list
@@ -435,9 +441,9 @@ export class WeverseApiV2 extends Api {
               post: ArtistPost;
               comments: { data: ArtistComment[] };
             }>(webUrl, apiUrlObj);
-            console.log(
-              JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
-            );
+            // console.log(
+            //   JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
+            // );
             if (!response) break;
 
             isCheckList.push(webUrl);
@@ -471,9 +477,9 @@ export class WeverseApiV2 extends Api {
               post: ArtiseMoment;
               comments: { data: ArtistComment[] };
             }>(webUrl, apiUrlObj);
-            console.log(
-              JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
-            );
+            // console.log(
+            //   JSON.stringify({ type, webUrl, apiUrlObj, response }, null, 2),
+            // );
             if (!response) break;
 
             isCheckList.push(webUrl);
