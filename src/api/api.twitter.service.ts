@@ -7,7 +7,7 @@ import { Api } from ".";
 
 const variables = {
   userId: "1227412479363338241",
-  count: 40,
+  count: 5,
   includePromotedContent: true,
   withCommunity: true,
   withSuperFollowsUserFields: true,
