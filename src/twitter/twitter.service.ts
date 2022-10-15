@@ -105,7 +105,7 @@ export class TwitterService {
             let name;
             if (isSmall) name = "small";
             if (isMedium) name = "medium";
-            if (isLarge) name = "large";
+            // if (isLarge) name = "large";
             const src = `${splitedUrl.join(".")}?format=${format}`;
             return {
               src: `${src}&name=${name}`,
