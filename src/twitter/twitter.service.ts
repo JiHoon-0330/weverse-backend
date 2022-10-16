@@ -98,12 +98,13 @@ export class TwitterService {
     const quotedFormatter = (quoted_status_result: any) => {
       if (!quoted_status_result?.result?.core?.user_results) return;
 
-      const { name, screen_name, created_at } =
+      const { name, screen_name } =
         quoted_status_result?.result?.core?.user_results?.result?.legacy;
       const {
         conversation_id_str,
         full_text,
         entities,
+        created_at,
         extended_entities: { media },
       } = quoted_status_result?.result?.legacy;
 
