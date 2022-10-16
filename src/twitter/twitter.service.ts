@@ -31,9 +31,102 @@ export class TwitterService {
 
     const entries = instructions[findIndex].entries;
 
+    const getHashtag = (hashtags: any[]) =>
+      hashtags?.map(({ text }: any) => text);
+
+    const getUserMentions = (user_mentions: any[]) =>
+      user_mentions?.map(({ screen_name }: any) => screen_name);
+
+    const getUrls = (urls: any[]) =>
+      (urls ?? [])?.map(({ display_url, expanded_url, url }: any) => ({
+        display_url,
+        expanded_url,
+        url,
+      }));
+
+    const getMedia = (media: any[]) =>
+      (media ?? [])?.map((value: any) => {
+        if (
+          value?.type !== "photo" &&
+          value?.type !== "video" &&
+          value?.type !== "animated_gif"
+        )
+          return;
+
+        if (value?.type === "video" || value?.type === "animated_gif") {
+          const getBitrate = (bitrate: any) => (isNaN(+bitrate) ? 0 : bitrate);
+          const {
+            video_info: { variants },
+            media_url_https,
+          } = value;
+          const sorted = variants.sort((a: any, b: any) => {
+            const aBitrate = getBitrate(a.bitrate);
+            const bBitrate = getBitrate(b.bitrate);
+            return bBitrate - aBitrate;
+          });
+
+          return {
+            type: "video",
+            url: value?.url,
+            src: sorted?.[0]?.url,
+            poster: media_url_https,
+          };
+        }
+
+        const { type, url, media_url_https, sizes } = value;
+        const isLarge = !!sizes?.large;
+        const isMedium = !!sizes?.medium;
+        const isSmall = !!sizes?.small;
+        const { w, h } = sizes?.large || sizes?.medium || sizes?.small;
+        const splitedUrl = media_url_https?.split(".");
+        const format = splitedUrl.pop();
+        let name;
+        if (isSmall) name = "small";
+        if (isMedium) name = "medium";
+        // if (isLarge) name = "large";
+        const src = `${splitedUrl.join(".")}?format=${format}`;
+        return {
+          src: `${src}&name=${name}`,
+          origin: `${src}&name=${"orig"}`,
+          width: w,
+          height: h,
+          type,
+          url,
+        };
+      });
+
+    const quotedFormatter = (quoted_status_result: any) => {
+      if (!quoted_status_result?.result?.core?.user_results) return;
+
+      const { name, screen_name, created_at } =
+        quoted_status_result?.result?.core?.user_results?.result?.legacy;
+      const {
+        conversation_id_str,
+        full_text,
+        entities,
+        extended_entities: { media },
+      } = quoted_status_result?.result?.legacy;
+
+      const { hashtags, user_mentions, urls } = entities;
+
+      return {
+        sortIndex: conversation_id_str,
+        name,
+        screen_name,
+        full_text,
+        created_at,
+        hashtags: getHashtag(hashtags),
+        user_mentions: getUserMentions(user_mentions),
+        urls: getUrls(urls),
+        media: getMedia(media),
+        meta: [],
+      };
+    };
+
     const data = entries
       .map((entry: any) => {
         const { sortIndex } = entry;
+
         const isRt =
           !!entry.content?.itemContent?.tweet_results?.result?.legacy
             ?.retweeted_status_result;
@@ -44,6 +137,11 @@ export class TwitterService {
           entry?.content?.itemContent?.tweet_results?.result;
 
         if (!isData?.core?.user_results) return;
+
+        const quoted = quotedFormatter(
+          entry.content?.itemContent?.tweet_results?.result
+            ?.quoted_status_result,
+        );
 
         const {
           core: {
@@ -58,65 +156,9 @@ export class TwitterService {
         const { name, screen_name } = result.legacy;
         const { full_text, created_at } = legacy;
         const { hashtags, user_mentions } = legacy.entities;
-        const urls = (legacy?.entities?.urls ?? []).map(
-          ({ display_url, expanded_url, url }: any) => ({
-            display_url,
-            expanded_url,
-            url,
-          }),
-        );
-        const media = (legacy?.extended_entities?.media ?? []).map(
-          (value: any) => {
-            if (
-              value?.type !== "photo" &&
-              value?.type !== "video" &&
-              value?.type !== "animated_gif"
-            )
-              return;
 
-            if (value?.type === "video" || value?.type === "animated_gif") {
-              const getBitrate = (bitrate: any) =>
-                isNaN(+bitrate) ? 0 : bitrate;
-              const {
-                video_info: { variants },
-                media_url_https,
-              } = value;
-              const sorted = variants.sort((a: any, b: any) => {
-                const aBitrate = getBitrate(a.bitrate);
-                const bBitrate = getBitrate(b.bitrate);
-                return bBitrate - aBitrate;
-              });
+        const urls = getUrls(legacy?.entities?.urls);
 
-              return {
-                type: "video",
-                url: value?.url,
-                src: sorted?.[0]?.url,
-                poster: media_url_https,
-              };
-            }
-
-            const { type, url, media_url_https, sizes } = value;
-            const isLarge = !!sizes?.large;
-            const isMedium = !!sizes?.medium;
-            const isSmall = !!sizes?.small;
-            const { w, h } = sizes?.large || sizes?.medium || sizes?.small;
-            const splitedUrl = media_url_https?.split(".");
-            const format = splitedUrl.pop();
-            let name;
-            if (isSmall) name = "small";
-            if (isMedium) name = "medium";
-            // if (isLarge) name = "large";
-            const src = `${splitedUrl.join(".")}?format=${format}`;
-            return {
-              src: `${src}&name=${name}`,
-              origin: `${src}&name=${"orig"}`,
-              width: w,
-              height: h,
-              type,
-              url,
-            };
-          },
-        );
         const meta: any[] = [];
 
         const returnData = {
@@ -126,13 +168,12 @@ export class TwitterService {
           screen_name,
           full_text,
           created_at,
-          hashtags: hashtags.map(({ text }: any) => text),
-          user_mentions: user_mentions.map(
-            ({ screen_name }: any) => screen_name,
-          ),
+          hashtags: getHashtag(hashtags),
+          user_mentions: getUserMentions(user_mentions),
           urls,
-          media,
+          media: getMedia(legacy?.extended_entities?.media),
           meta,
+          quoted,
         };
 
         return returnData;
