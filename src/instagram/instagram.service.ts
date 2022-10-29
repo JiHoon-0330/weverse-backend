@@ -13,6 +13,7 @@ import { join } from "path";
 @Injectable()
 export class InstagramService {
   #browser: Browser;
+  #cache: { [key in string]: { data: any; time: number } };
 
   constructor(
     private readonly instagramApi: InstagramApi,
@@ -20,9 +21,24 @@ export class InstagramService {
     private readonly cookieRepository: Repository<Cookie>,
   ) {
     this.#browser = new Browser();
+    this.#cache = {
+      [""]: {
+        data: {},
+        time: 0,
+      },
+    };
   }
 
   async getReels(from?: string) {
+    const cacheByFrom = this.#cache?.[from ?? ""];
+
+    if (cacheByFrom?.time && cacheByFrom?.time > Date.now() - 1000 * 60 * 10) {
+      return {
+        ...cacheByFrom?.data,
+        cacheTime: cacheByFrom?.time,
+      };
+    }
+
     const [reels, error] = await this.instagramApi.getReels(from);
 
     if (!reels) return;
