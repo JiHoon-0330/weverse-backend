@@ -105,7 +105,7 @@ export class TwitterService {
         full_text,
         entities,
         created_at,
-        extended_entities: { media },
+        extended_entities,
       } = quoted_status_result?.result?.legacy;
 
       const { hashtags, user_mentions, urls } = entities;
@@ -119,7 +119,7 @@ export class TwitterService {
         hashtags: getHashtag(hashtags),
         user_mentions: getUserMentions(user_mentions),
         urls: getUrls(urls),
-        media: getMedia(media),
+        media: getMedia(extended_entities?.media),
         meta: [],
       };
     };
