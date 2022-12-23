@@ -124,60 +124,97 @@ export class TwitterService {
       };
     };
 
+    const getData = (itemContent: any) => {
+      console.log(itemContent);
+      const isRt =
+        !!itemContent?.tweet_results?.result?.legacy?.retweeted_status_result;
+
+      const isData =
+        itemContent?.tweet_results?.result?.legacy?.retweeted_status_result
+          ?.result || itemContent?.tweet_results?.result;
+
+      if (!isData?.core?.user_results) return;
+
+      const quoted = quotedFormatter(
+        itemContent?.tweet_results?.result?.quoted_status_result,
+      );
+
+      const {
+        core: {
+          user_results: { result },
+        },
+        legacy,
+      } =
+        itemContent?.tweet_results?.result?.legacy?.retweeted_status_result
+          ?.result || itemContent?.tweet_results?.result;
+
+      const { name, screen_name } = result.legacy;
+      const { full_text, created_at } = legacy;
+      const { hashtags, user_mentions } = legacy.entities;
+
+      const urls = getUrls(legacy?.entities?.urls);
+
+      const meta: any[] = [];
+
+      const media = getMedia(legacy?.extended_entities?.media);
+
+      const returnData = {
+        isRt,
+        name,
+        screen_name,
+        full_text: media?.[0]?.url
+          ? full_text?.replace(media?.[0]?.url, "")
+          : full_text,
+        created_at,
+        hashtags: getHashtag(hashtags),
+        user_mentions: getUserMentions(user_mentions),
+        urls,
+        media,
+        meta,
+        quoted,
+      };
+
+      return returnData;
+    };
+
     const data = entries
       .map((entry: any) => {
         const { sortIndex } = entry;
+        const result = entry.content?.items?.length
+          ? entry.content?.items.map((value: any) =>
+              getData(value?.item?.itemContent),
+            )
+          : getData(entry.content?.itemContent);
 
-        const isRt =
-          !!entry.content?.itemContent?.tweet_results?.result?.legacy
-            ?.retweeted_status_result;
+        if (Array.isArray(result)) {
+          const itemsResult = result.reduce((result, item, index) => {
+            Object.entries(item).forEach(([key, value]) => {
+              if (index === 0) {
+                result[key] = value;
+              } else {
+                if (key === "full_text") {
+                  result[key] += value;
+                }
 
-        const isData =
-          entry?.content?.itemContent?.tweet_results?.result?.legacy
-            ?.retweeted_status_result?.result ||
-          entry?.content?.itemContent?.tweet_results?.result;
+                if (Array.isArray(value)) {
+                  result[key] = [...(result?.[key] ?? []), ...(value ?? [])];
+                }
+              }
+            });
 
-        if (!isData?.core?.user_results) return;
+            return result;
+          }, {});
 
-        const quoted = quotedFormatter(
-          entry.content?.itemContent?.tweet_results?.result
-            ?.quoted_status_result,
-        );
+          return {
+            sortIndex,
+            ...itemsResult,
+          };
+        }
 
-        const {
-          core: {
-            user_results: { result },
-          },
-          legacy,
-        } =
-          entry?.content?.itemContent?.tweet_results?.result?.legacy
-            ?.retweeted_status_result?.result ||
-          entry?.content?.itemContent?.tweet_results?.result;
-
-        const { name, screen_name } = result.legacy;
-        const { full_text, created_at } = legacy;
-        const { hashtags, user_mentions } = legacy.entities;
-
-        const urls = getUrls(legacy?.entities?.urls);
-
-        const meta: any[] = [];
-
-        const returnData = {
+        return {
           sortIndex,
-          isRt,
-          name,
-          screen_name,
-          full_text,
-          created_at,
-          hashtags: getHashtag(hashtags),
-          user_mentions: getUserMentions(user_mentions),
-          urls,
-          media: getMedia(legacy?.extended_entities?.media),
-          meta,
-          quoted,
+          ...result,
         };
-
-        return returnData;
       })
       .filter((v: any) => v);
 

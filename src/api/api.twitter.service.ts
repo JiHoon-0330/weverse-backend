@@ -109,7 +109,7 @@ export class TwitterApi extends Api {
   }
 
   async getTwitter(cursor?: string) {
-    const cookies = await this.getCookie();
+    // const cookies = await this.getCookie();
 
     const [data, error] = await this.api<any>({
       // url: `/i/api/graphql/U80qWAN-Rot-rSZsLcyqRQ/UserTweetsAndReplies?variables=${encodeURIComponent(
