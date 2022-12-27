@@ -180,6 +180,9 @@ export class TwitterService {
     const data = entries
       .map((entry: any) => {
         const { sortIndex } = entry;
+
+        if ((entry?.entryId ?? "").startsWith("cursor")) return null;
+
         const result = entry.content?.items?.length
           ? entry.content?.items.map((value: any) =>
               getData(value?.item?.itemContent),
