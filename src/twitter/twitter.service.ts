@@ -179,9 +179,9 @@ export class TwitterService {
 
     const data = entries
       .map((entry: any) => {
-        const { sortIndex } = entry;
+        const { sortIndex, entryId } = entry;
 
-        if ((entry?.entryId ?? "").startsWith("cursor")) return null;
+        if (!(entry?.entryId ?? "").startsWith("tweet")) return null;
 
         const result = entry.content?.items?.length
           ? entry.content?.items.map((value: any) =>
