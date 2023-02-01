@@ -191,7 +191,7 @@ export class TwitterService {
 
         if (Array.isArray(result)) {
           const itemsResult = result.reduce((result, item, index) => {
-            Object.entries(item).forEach(([key, value]) => {
+            Object.entries(item ?? {}).forEach(([key, value]) => {
               if (index === 0) {
                 result[key] = value;
               } else {
