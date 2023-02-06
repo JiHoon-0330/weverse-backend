@@ -125,7 +125,6 @@ export class TwitterService {
     };
 
     const getData = (itemContent: any) => {
-      console.log(itemContent);
       const isRt =
         !!itemContent?.tweet_results?.result?.legacy?.retweeted_status_result;
 
@@ -177,11 +176,28 @@ export class TwitterService {
       return returnData;
     };
 
+    // return entries.map((entry: any) => {
+    //   const { sortIndex, entryId } = entry;
+
+    //   if (
+    //     !(entry?.entryId ?? "").startsWith("homeConversation") &&
+    //     !(entry?.entryId ?? "").startsWith("tweet")
+    //   )
+    //     return null;
+
+    //   return entry;
+    // });
+
     const data = entries
       .map((entry: any) => {
         const { sortIndex, entryId } = entry;
 
-        if (!(entry?.entryId ?? "").startsWith("tweet")) return null;
+        const isHomeConversation = (entry?.entryId ?? "").startsWith(
+          "homeConversation",
+        );
+        const isTweet = (entry?.entryId ?? "").startsWith("tweet");
+
+        if (!isHomeConversation && !isTweet) return null;
 
         const result = entry.content?.items?.length
           ? entry.content?.items.map((value: any) =>
@@ -189,7 +205,7 @@ export class TwitterService {
             )
           : getData(entry.content?.itemContent);
 
-        if (Array.isArray(result)) {
+        if (isTweet && Array.isArray(result)) {
           const itemsResult = result.reduce((result, item, index) => {
             Object.entries(item ?? {}).forEach(([key, value]) => {
               if (index === 0) {
