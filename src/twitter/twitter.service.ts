@@ -190,12 +190,10 @@ export class TwitterService {
 
     const data = entries
       .map((entry: any) => {
-        const { sortIndex, entryId } = entry;
+        const { sortIndex, entryId = "" } = entry;
 
-        const isHomeConversation = (entry?.entryId ?? "").startsWith(
-          "homeConversation",
-        );
-        const isTweet = (entry?.entryId ?? "").startsWith("tweet");
+        const isHomeConversation = entryId.startsWith("homeConversation");
+        const isTweet = entryId.startsWith("tweet");
 
         if (!isHomeConversation && !isTweet) return null;
 
