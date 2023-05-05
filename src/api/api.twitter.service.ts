@@ -7,7 +7,7 @@ import { Api } from ".";
 
 const variables = {
   userId: "1227412479363338241",
-  count: 40,
+  count: 10,
   includePromotedContent: true,
   withCommunity: true,
   withSuperFollowsUserFields: true,
@@ -94,6 +94,8 @@ export class TwitterApi extends Api {
           "auth_token=f39745c67b01fd26ea863ecbff160a546160c9ec; ct0=d7dbc9036685db9c61eeafc127bd1ff567e715480a49118c40e806335a7e3551c8b3362a1c37703241f5f6addd95d9a4ded5693ce90878ef8988d2982c425cf0fa7fa42904e44f29b7f495fdbb651504;",
         Referer: "https://twitter.com/wooah_nv/with_replies",
         "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Accept-Encoding": "gzip",
+        "Content-Encoding": "gzip",
       },
     });
     this.#cookie = {
