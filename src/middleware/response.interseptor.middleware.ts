@@ -18,7 +18,14 @@ export class ResponseInterceptor implements NestInterceptor {
     const request = httpArgumentsHost.getRequest<Request>();
     const response = httpArgumentsHost.getResponse<Response>();
 
-    if (request.headers?.["user-agent"] !== "wooah.dlwlrma.app/vercel") {
+    const userAgent = request.headers?.["user-agent"];
+    const ip = request?.headers?.["x-forwarded-for"];
+
+    if (
+      userAgent !== "wooah.dlwlrma.app/vercel" &&
+      userAgent !== "localhost:3000" &&
+      ip !== "36.39.116.39"
+    ) {
       axios({
         method: "POST",
         baseURL: "https://hooks.slack.com",
@@ -27,15 +34,7 @@ export class ResponseInterceptor implements NestInterceptor {
           "Content-type": "application/json",
         },
         data: {
-          text: JSON.stringify(
-            {
-              ...(request.headers ?? {}),
-              ip: request?.ip,
-              ip2: request?.headers?.["x-forwarded-for"],
-            },
-            null,
-            2,
-          ),
+          text: JSON.stringify(request.headers, null, 2),
         },
       });
     }
