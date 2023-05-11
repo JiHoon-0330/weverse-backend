@@ -19,11 +19,12 @@ export class ResponseInterceptor implements NestInterceptor {
     const response = httpArgumentsHost.getResponse<Response>();
 
     const userAgent = request.headers?.["user-agent"];
+    const host = request.headers?.host;
     const ip = request?.headers?.["x-forwarded-for"];
 
     if (
       userAgent !== "wooah.dlwlrma.app/vercel" &&
-      userAgent !== "localhost:3000" &&
+      host !== "localhost:3000" &&
       ip !== "36.39.116.39"
     ) {
       axios({
