@@ -18,7 +18,7 @@ export class ResponseInterceptor implements NestInterceptor {
     const request = httpArgumentsHost.getRequest<Request>();
     const response = httpArgumentsHost.getResponse<Response>();
 
-    if (request.headers?.["user-agent"]?.toLowerCase()?.includes("axios")) {
+    if (request.headers?.["user-agent"] !== "wooah.dlwlrma.app/vercel") {
       axios({
         method: "POST",
         baseURL: "https://hooks.slack.com",
