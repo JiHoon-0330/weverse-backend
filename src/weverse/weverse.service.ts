@@ -51,13 +51,15 @@ export class WeverseService {
   }
 
   async getWeverse(from: string) {
-    const cacheByFrom = this.#cache?.[from ?? ""];
+    if (!from) {
+      const cacheByFrom = this.#cache?.[""];
 
-    if (cacheByFrom?.time && cacheByFrom?.time > Date.now() - 1000 * 60 * 3) {
-      return {
-        ...cacheByFrom?.data,
-        cacheTime: cacheByFrom?.time,
-      };
+      if (cacheByFrom?.time && cacheByFrom?.time > Date.now() - 1000 * 60 * 3) {
+        return {
+          ...cacheByFrom?.data,
+          cacheTime: cacheByFrom?.time,
+        };
+      }
     }
 
     const take = 11;
@@ -144,8 +146,8 @@ export class WeverseService {
       hasMore: notiList.length === take,
     };
 
-    if (response.data.length) {
-      this.#cache[from ?? ""] = {
+    if (response.data.length && !from) {
+      this.#cache[""] = {
         data: response,
         time: Date.now(),
       };
