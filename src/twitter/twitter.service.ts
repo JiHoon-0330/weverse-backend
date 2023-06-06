@@ -194,8 +194,9 @@ export class TwitterService {
 
         const isHomeConversation = entryId.startsWith("homeConversation");
         const isTweet = entryId.startsWith("tweet");
+        const isProfile = entryId.startsWith("profile");
 
-        if (!isHomeConversation && !isTweet) return null;
+        if (!isHomeConversation && !isTweet && !isProfile) return null;
 
         const result = entry.content?.items?.length
           ? entry.content?.items.map((value: any) =>
