@@ -137,6 +137,12 @@ export class TwitterService {
       const quoted = quotedFormatter(
         itemContent?.tweet_results?.result?.quoted_status_result,
       );
+      if ("quoted_status_result" in itemContent?.tweet_results?.result) {
+        console.log(
+          "quoted_status_result: ",
+          itemContent?.tweet_results?.result,
+        );
+      }
 
       const {
         core: {
@@ -173,6 +179,11 @@ export class TwitterService {
         quoted,
       };
 
+      if ("entryId" in itemContent) {
+        // @ts-ignore
+        returnData.id = itemContent?.entryId?.split("-")?.at(-1);
+      }
+
       return returnData;
     };
 
@@ -190,8 +201,9 @@ export class TwitterService {
 
     const data = entries
       .map((entry: any) => {
-        const { sortIndex, entryId = "" } = entry;
+        const { entryId = "" } = entry;
 
+        const id = entryId?.split("-")?.at(-1);
         const isHomeConversation = entryId.startsWith("homeConversation");
         const isTweet = entryId.startsWith("tweet");
         const isProfile = entryId.startsWith("profile");
@@ -223,14 +235,11 @@ export class TwitterService {
             return result;
           }, {});
 
-          return {
-            sortIndex,
-            ...itemsResult,
-          };
+          return itemsResult;
         }
 
         return {
-          sortIndex,
+          id,
           ...result,
         };
       })
