@@ -32,7 +32,7 @@ export class InstagramService {
   async getReels(from?: string) {
     const cacheByFrom = this.#cache?.[from ?? ""];
 
-    if (cacheByFrom?.time && cacheByFrom?.time > Date.now() - 1000 * 60 * 10) {
+    if (cacheByFrom?.time && cacheByFrom?.time > Date.now() - 1000 * 60 * 60) {
       return {
         ...cacheByFrom?.data,
         cacheTime: cacheByFrom?.time,
